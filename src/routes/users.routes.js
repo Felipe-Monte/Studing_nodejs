@@ -4,9 +4,9 @@ const UserController = require("../controllers/usersController")
 
 const usersRoutes = Router()
 
-// Testing Middleware
 const usersController = new UserController()
 
+// Testing Middleware
 function myMiddleware(request, response, next) {
   console.log("passei pelo middleware")
 
