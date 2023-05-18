@@ -1,16 +1,18 @@
 require("express-async-errors")
-const database = require("./database/sqlite")
+const migrationsRun = require("./database/sqlite/migrations")
 
 const appError = require("./utils/appError")
 const express = require("express")
 
 const routes = require("./routes")
 
+migrationsRun()
+
 const app = express()
 app.use(express.json())
 
 app.use(routes)
-database()
+
 
 app.use((error, request, response, next) => {
   if (error instanceof appError) {
