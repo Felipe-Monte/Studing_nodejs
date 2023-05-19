@@ -38,8 +38,8 @@ class UserController {
       throw new appError("Este email já existe no nosso sistema")
     }
 
-    user.name = name
-    user.email = email
+    user.name = name ?? user.name
+    user.email = email ?? user.email
 
     if (password && !old_password) {
       throw new appError("Precisa informar a senha antiga para alterar")
@@ -60,9 +60,9 @@ class UserController {
       name = ?,
       email = ?,
       password = ?,
-      updated_at = ?
+      updated_at = DATETIME('now')
       WHERE id = ?`,
-      [user.name, user.email, user.password, new Date(), id]
+      [user.name, user.email, user.password, id]
     )
 
     return response.json()
